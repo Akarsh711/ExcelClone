@@ -12,6 +12,7 @@ body{
     background-color: #218c74;
     display: flex;
     align-items: flex-end;
+    padding-left:1rem;
 }
 
 .page-action{
@@ -33,12 +34,9 @@ body{
     margin-right: 1rem;
 }
 
-.font-family-prop{
-    padding: 0.2rem;
-}
 
 .cellprop-actions-cont > select{
-    border: none;
+    border: none; 
     border-radius: 2px;
 }
 
@@ -49,11 +47,67 @@ body{
 .formula-actions-cont{
     height: 3rem;
     background-color: rgb(88, 119, 190);
+    padding-left:1rem;
+    display:flex;
+    align-items: center;
+}
+
+.formula-actions-cont > *{
+    display:inline-block;
+    margin-right:0.7rem;
+}
+.formula-actions-cont > input{
+    border:none;
+    outline:none;
+}
+
+.formula-icon{
+    height:1.2rem;
+}
+
+.adress-bar{
+    width:5rem;
+}
+.formula-bar{
+    /* container - adress bar - margin - paddding -  formula-icon*/
+    width :calc(100vw - 5rem - 0.7rem - 0.7rem - 1.2rem);
+}
+
+.font-family-prop{
+    padding: 0.2rem;
 }
 
 .sheet-actions-cont{
     height: 3rem;
-    background-color: rgb(248, 204, 146);
+    background-color: rgb(230, 222, 212);
+    display:flex;
+    align-items:center;
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+    gap:1rem ; /*It's add the space in between the elements*/
+}
+
+.sheet-actions-cont>*{
+    display:inline-block;
+}
+
+.sheet-add-icon{
+    width:2vw; 
+}
+.sheet-folder-cont{
+    display:flex;
+    align-items:center ;
+    height:80%;
+    width:5rem;
+    /* background-color:antiquewhite; */
+    width: calc(100vw - 2vw);
+}
+
+.sheet-folder{
+    text-decoration: underline;
+    font-weight: bold;
+    text-decoration-thickness: 3px;
+    font-size:0.9rem;
 }
 
 .grid-cont{
