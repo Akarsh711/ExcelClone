@@ -69,7 +69,7 @@ body{
     width:5rem;
 }
 .formula-bar{
-    /* container - adress bar - margin - paddding -  formula-icon*/
+    /* container - adress bar - margin - paddding -  formula-icon */
     width :calc(100vw - 5rem - 0.7rem - 0.7rem - 1.2rem);
 }
 
