@@ -119,18 +119,22 @@ body{
 .top-left-dummy-box{
     height: 2rem;
     width: 2rem;
+    position:fixed;
+    z-index:1;
     background-color: #747d8c;
 }
 
 .address-col-cont{
-    height: 10rem;
-    width: 2rem;
+    position: sticky;
+    top:2rem;
+    left:0rem;
 }
 
 .address-row-cont{
-    height: 2rem;
     display: flex;
-    
+    position:sticky;
+    top:0;
+    left:2rem;
 }
 
 .cells-cont{
