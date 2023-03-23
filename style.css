@@ -17,13 +17,12 @@ body{
 
 .page-action{
     margin: 0.5rem;
-    color: #f1f2f6;
-    
+    color: #f1f2f6;  
 }
 
 .cellprop-actions-cont{
     height: 3rem;
-    background-color: antiquewhite;
+    background-color: #ecf0f1;
     display: flex;
     align-items: center;
     padding-left:1rem;
@@ -33,7 +32,6 @@ body{
     display: inline-block;
     margin-right: 1rem;
 }
-
 
 .cellprop-actions-cont > select{
     border: none; 
@@ -45,8 +43,8 @@ body{
 }
 
 .formula-actions-cont{
-    height: 3rem;
-    background-color: rgb(88, 119, 190);
+    height: 2rem;
+    background-color: #ecf0f1;
     padding-left:1rem;
     display:flex;
     align-items: center;
@@ -59,18 +57,20 @@ body{
 .formula-actions-cont > input{
     border:none;
     outline:none;
+    height: 70%;
 }
 
 .formula-icon{
     height:1.2rem;
 }
 
-.adress-bar{
+.address-bar{
     width:5rem;
+    text-align:center;
 }
 .formula-bar{
     /* container - adress bar - margin - paddding -  formula-icon */
-    width :calc(100vw - 5rem - 0.7rem - 0.7rem - 1.2rem);
+     width :calc(100vw - 5rem - 0.7rem - 0.7rem - 0.7rem); 
 }
 
 .font-family-prop{
@@ -79,7 +79,7 @@ body{
 
 .sheet-actions-cont{
     height: 3rem;
-    background-color: rgb(230, 222, 212);
+    background-color: #ecf0f1;
     display:flex;
     align-items:center;
     padding-left:0.5rem;
@@ -111,6 +111,62 @@ body{
 }
 
 .grid-cont{
-    height: calc(100vh - 3rem - 3rem - 3rem - 3rem);
-    background-color: rgb(176, 227, 227);
+    height: calc(100vh - 3rem - 3rem - 2rem - 3rem);
+    background-color: #ecf0f1;
+    position: relative;
+    overflow: scroll;
+}
+
+.top-left-dummy-box{
+    height: 2rem;
+    width: 2rem;
+    position:fixed;
+    z-index:1;
+    background-color: #747d8c;
+}
+
+.address-col-cont{
+    position: sticky;
+    top:2rem;
+    left:0rem;
+}
+
+.address-row-cont{
+    display: flex;
+    position:sticky;
+    top:0;
+    left:2rem;
+}
+
+.cells-cont{
+    position: absolute;
+    top:0;
+    left:2rem;
+}
+
+.address-col{
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #dfe4ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.address-row{
+    height: 2rem;
+    width: 5rem;
+    border: 1px solid #dfe4ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell{
+    height: 2rem;
+    width: 5rem;
+    border: 1px solid #dfe4ea;
+}
+.row-container{
+    display: flex;
 }
