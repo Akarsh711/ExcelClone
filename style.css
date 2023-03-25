@@ -33,6 +33,10 @@ body{
     margin-right: 1rem;
 }
 
+.cellprop-actions-cont > *:hover{
+    cursor: pointer;  /* cursor changes to pointer instead of input on hovering */
+}
+
 .cellprop-actions-cont > select{
     border: none; 
     border-radius: 2px;
