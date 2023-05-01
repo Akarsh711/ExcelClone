@@ -11,7 +11,9 @@ for(let i = 0; i < rows; i++){
             fontFamily : "monospace",
             fontSize : "14",
             fontColor : "#000000",
-            bgColor : "#000000"
+            bgColor : "#000000",
+            value: "",
+            formula: "",
         }
         sheetRow.push(cellProp);
     }
@@ -38,7 +40,7 @@ let inactiveColorProp = "#ecf0f1";
 // Attach property Listener
 bold.addEventListener("click", (e) =>{
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     //Modification
     cellProp.bold = !cellProp.bold; //Data Change
@@ -49,10 +51,10 @@ bold.addEventListener("click", (e) =>{
 
 italic.addEventListener("click", (e) =>{
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     //Modification
-    cellProp.italic = !cellProp.underline; //Data Change
+    cellProp.italic = !cellProp.italic; //Data Change 
     cell.style.fontStyle  = cellProp.italic ? "italic" : "normal"; //UI change when B active    
     italic.style.backgroundColor = cellProp.italic ? activeColorProp : inactiveColorProp;  //UI change B background if bold true
 
@@ -60,18 +62,18 @@ italic.addEventListener("click", (e) =>{
 
 underline.addEventListener("click", (e) =>{
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     //Modification
     cellProp.underline = !cellProp.underline; //Data Change
-    cell.style.textDecoration = cellProp.bold ? "underline" : "none"; //UI change when B active    
+    cell.style.textDecoration = cellProp.underline ? "underline" : "none"; //UI change when B active    
     underline.style.backgroundColor = cellProp.underline ? activeColorProp : inactiveColorProp;  //UI change B background if bold true
 
 })
 
 fontSize.addEventListener("change", (e) => {
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     cellProp.fontSize = fontSize.value; //Data change
     cell.style.fontSize = cellProp.fontSize + "px";
@@ -81,7 +83,7 @@ fontSize.addEventListener("change", (e) => {
 
 fontFamily.addEventListener("change", (e) => {
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     cellProp.fontFamily = fontFamily.value; //Data change
     cell.style.fontFamily = cellProp.fontFamily;
@@ -91,7 +93,7 @@ fontFamily.addEventListener("change", (e) => {
 
 fontColor.addEventListener("change", (e) => {
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     cellProp.fontColor = fontColor.value; //Data change
     cell.style.color = cellProp.fontColor;
@@ -100,7 +102,7 @@ fontColor.addEventListener("change", (e) => {
 
 bgColor.addEventListener("change", (e) => {
     let address = addressBar.value;
-    let [cell, cellProp] = activecell(address);
+    let [cell, cellProp] = getCellAndCellProp(address);
 
     cellProp.bgColor = bgColor.value; //Data change
     cell.style.backgroundColor = cellProp.bgColor;
@@ -109,11 +111,10 @@ bgColor.addEventListener("change", (e) => {
 
 
 //alignment 
-
 alignment.forEach((alignElem) => {
     alignElem.addEventListener("click", (e) => {
         let address = addressBar.value;
-        let [cell, cellProp] = activecell(address);
+        let [cell, cellProp] = getCellAndCellProp(address);
 
         let alignValue = e.target.classList[0];
         cellProp.alignment = alignValue; // Data change
@@ -195,7 +196,7 @@ function addListenerToAttachCellProperties(cell) {
     })
 }
 
-function activecell(address){
+function getCellAndCellProp(address){
     let [rid, cid] = decodeRIDCIDFromAddress(address);
     // Access cell & storage object
     let cell = document.querySelector(`.cell[rid="${rid}"][cid="${cid}"]`); //use backtick always for interpolation or using javascript inside
