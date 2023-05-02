@@ -28,11 +28,12 @@ formulaBar.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && formulaBar.value) {
     let evaluatedValue = evaluateFormula(inputFormula);
 
-    //if change in formula break old parent-child relation and evaluate new formula, add neew p-c relation
+    //if change in formula break old parent-child relation and evaluate new formula, add new p-c relation
     let address = addressBar.value;
     let [cell, cellProp] = getCellAndCellProp(address);
     if (inputFormula !== cellProp.formula)
       removeChildFromParent(cellProp.formula);
+    
     // To update UI and DB
     setCellUIAndCellProp(evaluatedValue, inputFormula, address);
     addChildToParent(inputFormula);
@@ -40,6 +41,18 @@ formulaBar.addEventListener("keydown", (e) => {
     updateChldrenCells(address);
   }
 });
+
+function addChildToGraphComponent(formula, childAddress){
+  let [crid, ccid] = decodeRIDCIDFromAddress(childAddress);
+  let encodedFormula = formula.split(" ");
+  for (let i = 0; i < encodedFormula.length; i++) {
+    let asciiVal = encodedFormula[i].charCodeAt(0); //["A1", "+", "10"]
+    if (asciiVal >= 65 && asciiVal <= 90) {
+      let [prid, pcid] = decodeRIDCIDFromAddress(encodedFormula[i]);
+      graphComponentMatrix[prid][pcid].push([crid, ccid]);
+    }
+  }
+}
 
 function updateChldrenCells(parentAddress) {
   let [parentCell, parentCellProp] = getCellAndCellProp(parentAddress);
