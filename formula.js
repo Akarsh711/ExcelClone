@@ -17,16 +17,15 @@ for (let i = 0; i < rows; i++) {
 }
 
 let formulaBar = document.querySelector(".formula-bar");
-
 /*
 Formula Evaluation
     Normal expression -> eg: (10+20)
     Dependency expression -> eg: (A1+A2+10)
 */
-formulaBar.addEventListener("keydown", (e) => {
+formulaBar.addEventListener("keydown", async (e) => {
   let inputFormula = formulaBar.value;
   if (e.key === "Enter" && formulaBar.value) {
-    let evaluatedValue = evaluateFormula(inputFormula);
+    // let evaluatedValue = evaluateFormula(inputFormula);
 
     //if change in formula break old parent-child relation and evaluate new formula, add new p-c relation
     let address = addressBar.value;
@@ -38,17 +37,29 @@ formulaBar.addEventListener("keydown", (e) => {
 
     // check formula is cyclic or not, then only evaluate
     // True : Cycle, False: Not cyclic
-    let isCyclic = isGraphCyclic(graphComponentMatrix);
-    if (isCyclic === true) {
-      alert("Your formula detected a cycle");
+    let cycleResponse = isGraphCyclic(graphComponentMatrix);
+    if (cycleResponse) {
+      // alert("Your formula detected a cycle");
+      let response = confirm(
+        "Your formula is cyclic. Do you want to trace your path?"
+      );
+
+      while (response === true) {
+        // Keep on tracking color until user is satisfied
+        await isGraphCyclicTracePath(graphComponentMatrix, cycleResponse); // I want to complete full iteration of color tracking, so I will attach wait here also.
+        response = confirm(
+          "Your formula is cyclic. Do you want to trace your path?"
+        );
+      }
       removeChildFromGraphComponent(inputFormula, address);
       return;
     }
 
+    let evaluatedValue = evaluateFormula(inputFormula);
+
     // To update UI and DB
     setCellUIAndCellProp(evaluatedValue, inputFormula, address);
     addChildToParent(inputFormula);
-    console.log(sheetDB);
     updateChldrenCells(address);
   }
 });
@@ -67,7 +78,7 @@ function addChildToGraphComponent(formula, childAddress) {
 
 function removeChildFromGraphComponent(inputFormula, address) {
   let childAddress = addressBar.value;
-  let encodedFormula = formula.split(" ");
+  let encodedFormula = inputFormula.split(" ");
   for (let i = 0; i < encodedFormula.length; i++) {
     let asciiVal = encodedFormula[i].charCodeAt(0); //["A1", "+", "10"]
     if (asciiVal >= 65 && asciiVal <= 90) {
@@ -150,3 +161,5 @@ function setCellUIAndCellProp(evaluatedValue, formula, address) {
   cellProp.value = evaluatedValue;
   cellProp.formula = formula;
 }
+
+//https://youtu.be/vEZ87sRmz30?t=2978
