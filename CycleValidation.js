@@ -37,11 +37,11 @@ function isGraphCyclic(graphComponentMatrix) {
           dfsVisited
         );
         // Found cycle so return immediately, no need to explore more path
-        if (response === true) return true;
+        if (response === true) return [i, j];
       }
     }
   }
-  return false;
+  return null;
 }
 // Start -> visited(True) dfsVisited(True)
 // End -> dfsVisited(FALSE)
