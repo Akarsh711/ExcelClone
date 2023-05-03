@@ -33,13 +33,13 @@ formulaBar.addEventListener("keydown", (e) => {
     let [cell, cellProp] = getCellAndCellProp(address);
     if (inputFormula !== cellProp.formula)
       removeChildFromParent(cellProp.formula);
-    
+
     addChildToGraphComponent(inputFormula, address);
-    
+
     // check formula is cyclic or not, then only evaluate
     // True : Cycle, False: Not cyclic
-    let isCyclic = isGraphCyclic();
-    if(isCyclic === true){
+    let isCyclic = isGraphCyclic(graphComponentMatrix);
+    if (isCyclic === true) {
       alert("Your formula detected a cycle");
       removeChildFromGraphComponent(inputFormula, address);
       return;
@@ -53,7 +53,7 @@ formulaBar.addEventListener("keydown", (e) => {
   }
 });
 
-function addChildToGraphComponent(formula, childAddress){
+function addChildToGraphComponent(formula, childAddress) {
   let [crid, ccid] = decodeRIDCIDFromAddress(childAddress);
   let encodedFormula = formula.split(" ");
   for (let i = 0; i < encodedFormula.length; i++) {
@@ -65,7 +65,7 @@ function addChildToGraphComponent(formula, childAddress){
   }
 }
 
-function removeChildFromGraphComponent(inputFormula, address){
+function removeChildFromGraphComponent(inputFormula, address) {
   let childAddress = addressBar.value;
   let encodedFormula = formula.split(" ");
   for (let i = 0; i < encodedFormula.length; i++) {
