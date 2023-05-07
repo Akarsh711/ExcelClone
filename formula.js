@@ -38,6 +38,7 @@ formulaBar.addEventListener("keydown", async (e) => {
     // check formula is cyclic or not, then only evaluate
     // True : Cycle, False: Not cyclic
     let cycleResponse = isGraphCyclic(graphComponentMatrix);
+    console.log("cycle response:"+cycleResponse);
     if (cycleResponse) {
       // alert("Your formula detected a cycle");
       let response = confirm(

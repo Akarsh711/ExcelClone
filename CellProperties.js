@@ -1,25 +1,32 @@
-let sheetDB = [];
 
-for (let i = 0; i < rows; i++) {
-  let sheetRow = [];
-  for (let j = 0; j < cols; j++) {
-    let cellProp = {
-      bold: false,
-      italic: false,
-      underline: false,
-      alignment: "left",
-      fontFamily: "monospace",
-      fontSize: "14",
-      fontColor: "#000000",
-      bgColor: "#000000",
-      value: "",
-      formula: "",
-      children: [],
-    };
-    sheetRow.push(cellProp);
-  }
-  sheetDB.push(sheetRow);
+
+{
+  let addSheetBtn = document.querySelector(".sheet-add-icon");
+  addSheetBtn.click();
+  // handelSheetsUIProperties();
+
 }
+
+// for (let i = 0; i < rows; i++) {
+//   let sheetRow = [];
+//   for (let j = 0; j < cols; j++) {
+//     let cellProp = {
+//       bold: false,
+//       italic: false,
+//       underline: false,
+//       alignment: "left",
+//       fontFamily: "monospace",
+//       fontSize: "14",
+//       fontColor: "#000000",
+//       bgColor: "#000000",
+//       value: "",
+//       formula: "",
+//       children: [],
+//     };
+//     sheetRow.push(cellProp);
+//   }
+//   sheetDB.push(sheetRow);
+// }
 
 // Selectors for cell props
 let bold = document.querySelector(".bold");
@@ -122,7 +129,7 @@ alignment.forEach((alignElem) => {
     cell.style.textAlign = cellProp.alignment; // UI change (1)
 
     switch (
-      alignValue // UI change (2)
+    alignValue // UI change (2)
     ) {
       case "left":
         leftAlign.style.backgroundColor = activeColorProp;
@@ -150,8 +157,10 @@ for (let i = 0; i < allCells.length; i++) {
 
 function addListenerToAttachCellProperties(cell) {
   cell.addEventListener("click", (e) => {
+    // console.log(sheetDB);
     let address = addressBar.value;
     let [rid, cid] = decodeRIDCIDFromAddress(address);
+    // alert(rid);
     let cellProp = sheetDB[rid][cid];
 
     // Apply cell Properties
@@ -180,7 +189,7 @@ function addListenerToAttachCellProperties(cell) {
     fontSize.value = cellProp.fontSize;
     fontFamily.value = cellProp.fontFamily;
     switch (
-      cellProp.alignment // UI change (2)
+    cellProp.alignment // UI change (2)
     ) {
       case "left":
         leftAlign.style.backgroundColor = activeColorProp;
@@ -200,7 +209,7 @@ function addListenerToAttachCellProperties(cell) {
     }
     let formulaBar = document.querySelector(".formula-bar");
     formulaBar.value = cellProp.formula;
-    cell.value = cellProp.value;
+    cell.innerText = cellProp.value;
   });
 }
 
