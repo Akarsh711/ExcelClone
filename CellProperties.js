@@ -1,10 +1,7 @@
-
-
 {
   let addSheetBtn = document.querySelector(".sheet-add-icon");
   addSheetBtn.click();
   // handelSheetsUIProperties();
-
 }
 
 // for (let i = 0; i < rows; i++) {
@@ -129,7 +126,7 @@ alignment.forEach((alignElem) => {
     cell.style.textAlign = cellProp.alignment; // UI change (1)
 
     switch (
-    alignValue // UI change (2)
+      alignValue // UI change (2)
     ) {
       case "left":
         leftAlign.style.backgroundColor = activeColorProp;
@@ -189,7 +186,7 @@ function addListenerToAttachCellProperties(cell) {
     fontSize.value = cellProp.fontSize;
     fontFamily.value = cellProp.fontFamily;
     switch (
-    cellProp.alignment // UI change (2)
+      cellProp.alignment // UI change (2)
     ) {
       case "left":
         leftAlign.style.backgroundColor = activeColorProp;
