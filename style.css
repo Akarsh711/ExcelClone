@@ -98,20 +98,36 @@ body{
 .sheet-add-icon{
     width:2vw; 
 }
+
+.sheet-add-icon{
+    cursor:pointer;
+}
 .sheet-folder-cont{
     display:flex;
-    align-items:center ;
+    align-items:center;
     height:80%;
     width:5rem;
     /* background-color:antiquewhite; */
+    overflow:auto;
     width: calc(100vw - 2vw);
 }
 
 .sheet-folder{
     text-decoration: underline;
+    /* border:solid red; */
+    height:80%;
     font-weight: bold;
     text-decoration-thickness: 3px;
     font-size:0.9rem;
+    background-color: lightblue;
+    text-align:center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sheet-content{
+    width:5rem;
 }
 
 .grid-cont{

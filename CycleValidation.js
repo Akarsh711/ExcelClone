@@ -1,12 +1,13 @@
-let graphComponentMatrix = [];
+// let collectedGraphComponent = [];
+// let graphComponentMatrix = [];
 
-for (let i = 0; i < rows; i++) {
-  let row = [];
-  for (let j = 0; j < cols; j++) {
-    row.push([]);
-  }
-  graphComponentMatrix.push(row);
-}
+// for (let i = 0; i < rows; i++) {
+//    let row = [];
+//    for (let j = 0; j < cols; j++) {
+//       row.push([]);
+//    }
+//    graphComponentMatrix.push(row);
+// }
 
 // True : Cycle, False: Not cyclic
 function isGraphCyclic(graphComponentMatrix) {
@@ -37,11 +38,11 @@ function isGraphCyclic(graphComponentMatrix) {
           dfsVisited
         );
         // Found cycle so return immediately, no need to explore more path
-        if (response === true) return true;
+        if (response === true) return [i, j];
       }
     }
   }
-  return false;
+  return null;
 }
 // Start -> visited(True) dfsVisited(True)
 // End -> dfsVisited(FALSE)
@@ -59,18 +60,13 @@ function dfsCycleDetection(
   dfsVisited[srcr][srcc] = true;
 
   // A1 -> [ [0,1], [1,0], [5,10],...]
-
-  for (
-    let children = 0;
-    children < graphComponentMatrix[srcr][srcc].length;
-    children++
-  ) {
+  for ( let children = 0; children < graphComponentMatrix[srcr][srcc].length; children++) {
     let [nbrr, nbrc] = graphComponentMatrix[srcr][srcc][children];
     if (visited[nbrr][nbrc] === false) {
       let response = dfsCycleDetection(
         graphComponentMatrix,
-        nbrr,
-        nbrc,
+        nbrr, // neighbour row
+        nbrc, // neighbour col
         visited,
         dfsVisited
       );
